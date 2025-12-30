@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOD PARTY</title>
+    <!-- Подключаем жуткий шрифт "Nosifer" от Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #050000;
+            overflow: hidden;
+            font-family: 'Nosifer', cursive; /* Шрифт капающей крови */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Кровавый дождь (контейнер) */
+        #blood-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Виньетка (затемнение по краям) */
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 150px #000000;
+            z-index: 2;
+            background: radial-gradient(circle, transparent 40%, #200000 100%);
+        }
+
+        /* Контейнер контента */
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        /* Заголовок (вместо лого) */
+        h1 {
+            color: #ff0000;
+            font-size: 60px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            /* Эффект свечения и грязной тени */
+            text-shadow: 
+                0 0 10px #8b0000, 
+                0 0 20px #ff0000, 
+                0 0 40px #8b0000,
+                4px 4px 0px #220000;
+            animation: text-flicker 4s infinite;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-family: 'Rubik Glitch', cursive;
+            color: #a8a8a8;
+            font-size: 20px;
+            margin-bottom: 50px;
+            letter-spacing: 5px;
+            opacity: 0.8;
+        }
+
+        /* Кнопка */
+        .join-btn {
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Rubik Glitch', sans-serif; /* Более читаемый, но рваный шрифт для кнопки */
+            font-size: 32px;
+            color: #fff;
+            background: #4a0000;
+            padding: 25px 60px;
+            border: 3px solid #ff0000;
+            border-radius: 4px;
+            box-shadow: 
+                0 0 20px #ff0000, 
+                inset 0 0 20px #000;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            text-shadow: 2px 2px 0 #000;
+            cursor: pointer;
+        }
+
+        /* Эффект жидкости внутри кнопки */
+        .join-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.5), transparent);
+            transition: 0.5s;
+        }
+
+        .join-btn:hover::before {
+            left: 100%;
+        }
+
+        .join-btn:hover {
+            background: #800000;
+            box-shadow: 
+                0 0 40px #ff0000, 
+                0 0 80px #ff0000,
+                inset 0 0 30px #300000;
+            transform: scale(1.05);
+            text-shadow: 0 0 10px #fff;
+        }
+
+        /* Анимации */
+        @keyframes text-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 10px #8b0000, 0 0 20px #ff0000;
+            }
+            20%, 24%, 55% {
+                opacity: 0.5;
+                text-shadow: none;
+            }
+        }
+
+        /* Стили для капель крови (генерируются скриптом) */
+        .drop {
+            position: absolute;
+            background: linear-gradient(180deg, rgba(139,0,0,0), #ff0000);
+            width: 2px;
+            height: 20px;
+            top: -50px;
+            opacity: 0.7;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 40px; }
+            .join-btn { width: 80%; font-size: 24px; padding: 20px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="blood-rain"></div>
+    <div class="vignette"></div>
+
+    <div class="content">
+        <!-- Текст, заменяющий лого -->
+        <h1>Blood<br>Party</h1>
+        <div class="subtitle">ЕБИ СФЕРУ С НАМИ</div>
+
+        <!-- Кнопка -->
+        <a href="https://t.me/+-kVdlNMf_BM1NDQy" class="join-btn">ВСТУПИТЬ</a>
+    </div>
+
+    <script>
+        // Скрипт для генерации кровавого дождя
+        function createBloodRain() {
+            const container = document.getElementById('blood-rain');
+            const dropCount = 50; // Количество капель
+
+            for (let i = 0; i < dropCount; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('drop');
+                
+                // Рандомная позиция по ширине
+                drop.style.left = Math.random() * 100 + 'vw';
+                // Рандомная длительность падения
+                const duration = Math.random() * 1 + 0.5; // от 0.5 до 1.5 сек
+                drop.style.animation = `fall ${duration}s linear infinite`;
+                // Рандомная задержка
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                // Рандомная толщина
+                drop.style.width = Math.random() * 2 + 1 + 'px';
+                // Рандомная высота капли
+                drop.style.height = Math.random() * 20 + 10 + 'px';
+
+                container.appendChild(drop);
+            }
+        }
+
+        // Добавляем стиль анимации через JS (чтобы было проще вставлять)
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes fall {
+                to { transform: translateY(110vh); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+        createBloodRain();
+    </script>
+
+</body>
+</html>
