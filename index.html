@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BLOOD PARTY</title>
-    <!-- Подключаем жуткий шрифт "Nosifer" от Google -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Rubik+Glitch&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -19,7 +19,7 @@
             align-items: center;
         }
 
-        /* Кровавый дождь (контейнер) */
+        
         #blood-rain {
             position: absolute;
             top: 0;
@@ -30,7 +30,7 @@
             z-index: 1;
         }
 
-        /* Виньетка (затемнение по краям) */
+        
         .vignette {
             position: absolute;
             top: 0;
@@ -42,7 +42,7 @@
             background: radial-gradient(circle, transparent 40%, #200000 100%);
         }
 
-        /* Контейнер контента */
+        
         .content {
             position: relative;
             z-index: 10;
@@ -52,7 +52,7 @@
             padding: 20px;
         }
 
-        /* Заголовок (вместо лого) */
+        
         h1 {
             color: #ff0000;
             font-size: 60px;
@@ -81,7 +81,7 @@
         .join-btn {
             display: inline-block;
             text-decoration: none;
-            font-family: 'Rubik Glitch', sans-serif; /* Более читаемый, но рваный шрифт для кнопки */
+            font-family: 'Rubik Glitch', sans-serif; 
             font-size: 32px;
             color: #fff;
             background: #4a0000;
@@ -98,7 +98,7 @@
             cursor: pointer;
         }
 
-        /* Эффект жидкости внутри кнопки */
+        
         .join-btn::before {
             content: '';
             position: absolute;
@@ -124,7 +124,7 @@
             text-shadow: 0 0 10px #fff;
         }
 
-        /* Анимации */
+        
         @keyframes text-flicker {
             0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
                 opacity: 1;
@@ -136,7 +136,7 @@
             }
         }
 
-        /* Стили для капель крови (генерируются скриптом) */
+        
         .drop {
             position: absolute;
             background: linear-gradient(180deg, rgba(139,0,0,0), #ff0000);
@@ -164,36 +164,36 @@
         <div class="subtitle">ЕБИ СФЕРУ С НАМИ</div>
 
         <!-- Кнопка -->
-        <a href="https://t.me/+-kVdlNMf_BM1NDQy" class="join-btn">ВСТУПИТЬ</a>
+        <a href="https://t.me/+Y9mxJit1fQxjNjli" class="join-btn">ВСТУПИТЬ</a>
     </div>
 
     <script>
-        // Скрипт для генерации кровавого дождя
+        
         function createBloodRain() {
             const container = document.getElementById('blood-rain');
-            const dropCount = 50; // Количество капель
+            const dropCount = 50; 
 
             for (let i = 0; i < dropCount; i++) {
                 const drop = document.createElement('div');
                 drop.classList.add('drop');
                 
-                // Рандомная позиция по ширине
+                
                 drop.style.left = Math.random() * 100 + 'vw';
-                // Рандомная длительность падения
-                const duration = Math.random() * 1 + 0.5; // от 0.5 до 1.5 сек
+               
+                const duration = Math.random() * 1 + 0.5; 
                 drop.style.animation = `fall ${duration}s linear infinite`;
-                // Рандомная задержка
+                
                 drop.style.animationDelay = Math.random() * 2 + 's';
-                // Рандомная толщина
+                
                 drop.style.width = Math.random() * 2 + 1 + 'px';
-                // Рандомная высота капли
+                
                 drop.style.height = Math.random() * 20 + 10 + 'px';
 
                 container.appendChild(drop);
             }
         }
 
-        // Добавляем стиль анимации через JS (чтобы было проще вставлять)
+       
         const styleSheet = document.createElement("style");
         styleSheet.innerText = `
             @keyframes fall {
